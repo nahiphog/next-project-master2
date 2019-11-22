@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
+from instagram_api.util.response import *
 from models.user import User
 
 users_api_blueprint = Blueprint('users_api',
@@ -100,6 +101,14 @@ def update(user_id):
         return jsonify(response), 401
         
     user = User.get_or_none(User.id == user_id)
+
+    if not user:
+        response = {
+                "message": 'User not found',
+                "status": "fail"
+            }
+        return jsonify(response), 401
+
     jwt_user = get_jwt_identity()
 
     if not jwt_user == user.name:
@@ -144,6 +153,9 @@ def update(user_id):
 @jwt_required
 def update_profile_pic(user_id):
     user = User.get_or_none(User.id == user_id)
-    
+
+    if not user:
+
+
 
 

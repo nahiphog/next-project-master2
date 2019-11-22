@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from instagram_api.util import *
+from instagram_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
 
