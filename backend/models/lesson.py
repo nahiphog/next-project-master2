@@ -7,7 +7,7 @@ from config import Config
 class Lesson(BaseModel):
     title = pw.CharField(null=False)
     description = pw.CharField(null=False)
-    rating = pw.IntegerField(null=True)
+    rating = pw.IntegerField(default=0)
     teach = pw.BooleanField(default = False)
     owner = pw.ForeignKeyField(User, on_delete='CASCADE', backref='lessons')
     
