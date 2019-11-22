@@ -1,7 +1,7 @@
+from config import Config
+from flask_login import UserMixin
 from models.base_model import BaseModel
 import peewee as pw
-from flask_login import UserMixin
-from config import Config
 # from sqlalchemy.ext.hybrid import hybrid_property
 
 

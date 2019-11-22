@@ -1,8 +1,8 @@
 from flask import Blueprint, request
-from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from instagram_api.util.response import *
 from models.user import User
+from werkzeug.security import check_password_hash, generate_password_hash
 
 users_api_blueprint = Blueprint('users_api', __name__)
 
@@ -54,9 +54,9 @@ def new():
                 "name": user.name,
                 'email': user.email
             }            
-            return success_201('Account successfully created!', data)
+            return success_201('Created account successfully', data)
         else:
-            return error_401('Response is not JSON!')
+            return error_401('Create account failed!')
     else:
         return error_401('Invalid input!')
 
@@ -113,9 +113,9 @@ def update(user_id):
                 'email': user.email,
                 'profile_picture': user.profile_picture
             }        
-            return success_201('Account updated successfully!', data)
+            return success_201('Updated user details successfully!', data)
         else:
-            return error_401('Something went wrong when updating user details!')
+            return error_401('Update user details failed!')
  
 # @users_api_blueprint.route('/<user_id>', methods=['POST'])
 # @jwt_required
