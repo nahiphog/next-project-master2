@@ -4,8 +4,7 @@ from instagram_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
 
-lessons_api_blueprint = Blueprint('lessons_api',
-                             __name__)
+lessons_api_blueprint = Blueprint('lessons_api', __name__)
 
 @lessons_api_blueprint.route('/create', methods=['POST'])
 @jwt_required
@@ -44,11 +43,11 @@ def create():
                 'teach': lesson.teach,
                 'owner': lesson.user
             }
-           return success_201("New lesson is successfully create", lesson)
+            return success_201("New lesson is successfully create", lesson)
         else:
-           return error_401("Create lesson failed")    
+            return error_401("Create lesson failed")    
     else:
-       return error_401("Invalid title or description")
+        return error_401("Invalid title or description")
 
 @lessons_api_blueprint.route('/', methods=['GET'])
 @jwt_required
