@@ -21,7 +21,7 @@ def index(): #returns a list of users from database
     } for user in User.select()
     ]
 
-    success_200(users)
+    return success_200(users)
 
 
 @users_api_blueprint.route('/signup', methods=['POST'])
@@ -68,24 +68,24 @@ def show(user_id):
     'email': search_user.email,
     'profile_picture': search_user.profile_picture}
     
-    success_201(f'Returned details of user with id: {search_user.id}', user)
+    return success_201(f'Returned details of user with id: {search_user.id}', user)
 
 @users_api_blueprint.route('/<user_id>', methods=['POST'])
 @jwt_required
 def update(user_id):
     
     if not request.is_json:
-        error_401('Response is not JSON!')
+       return error_401('Response is not JSON!')
         
     user = User.get_or_none(User.id == user_id)
 
     if not user:
-        error_401('User not found!')
+       return error_401('User not found!')
 
     jwt_user = get_jwt_identity()
 
     if not jwt_user == user.name:
-        error_401('Unauthorized user!')
+       return error_401('Unauthorized user!')
         
 
     user_data = request.get_json
@@ -105,7 +105,7 @@ def update(user_id):
             'email': user.email,
             'profile_picture': user.profile_picture}
         
-            success_201('Account updated successfully!', user)
+           return success_201('Account updated successfully!', user)
 
         else:
             error_401('Something went wrong when updating user details!')

@@ -14,7 +14,7 @@ sessions_api_blueprint = Blueprint('sessions_api', __name__)
 def create():
     #check if response is even a json 
     if not request.is_json:
-        error_401('Reponse is not a JSON !')
+        return error_401('Reponse is not a JSON !')
     
     #getting data from front end
     data = request.get_json()
@@ -23,7 +23,7 @@ def create():
 
     #check if name and password field are filled
     if not (name and password):
-        error_401('Invalid input!')
+       return error_401('Invalid input!')
 
     user = User.get_or_none(User.name == name)
     #checking passwords if user with provided username exists
@@ -42,9 +42,9 @@ def create():
 
             }
             
-            success_201('User credentials are verified for sign in!', data)
+            return success_201('User credentials are verified for sign in!', data)
         
         else:
-            error_401('Some error occurred! Please try again!')
+           return error_401('Some error occurred! Please try again!')
 
 
