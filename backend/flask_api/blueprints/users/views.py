@@ -1,6 +1,6 @@
 from flask import Blueprint, request
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
-from instagram_api.util.response import *
+from flask_api.util.response import *
 from models.user import User
 from werkzeug.security import check_password_hash, generate_password_hash
 
