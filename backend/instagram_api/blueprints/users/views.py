@@ -9,6 +9,7 @@ users_api_blueprint = Blueprint('users_api',
 
 
 @users_api_blueprint.route('/index', methods=['GET'])
+@jwt_required
 def index(): #returns a list of users from database
     user =[ 
         {
@@ -71,6 +72,7 @@ def new():
 
 
 @users_api_blueprint.route('/<user_id>', methods=['GET'])
+@jwt_required
 def show(user_id):
     user = User.get_or_none(User.id == user_id)
 
@@ -136,5 +138,12 @@ def update(user_id):
                 "status": "fail"
             }
         return jsonify(response), 401
+
+
+@users_api_blueprint.route('/<user_id>', methods=['POST'])
+@jwt_required
+def update_profile_pic(user_id):
+    user = User.get_or_none(User.id == user_id)
+    
 
 
