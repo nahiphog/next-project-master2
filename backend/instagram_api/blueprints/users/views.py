@@ -122,10 +122,10 @@ def update(user_id):
             response = {
             'message': 'Account updated successfully!',
             'status': 'success',
-            'id': user.id,
+            user: {'id': user.id,
             'name': user.name,
             'email': user.email,
-            'profile_picture': user.profile_picture
+            'profile_picture': user.profile_picture}
         }
 
             return jsonify(response), 200
