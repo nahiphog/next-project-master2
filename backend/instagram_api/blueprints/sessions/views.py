@@ -1,5 +1,4 @@
-from flask import Flask, jsonify, Blueprint, url_for, redirect, render_template, request
-from flask_login import login_user,logout_user, current_user, login_required
+from flask import Flask, jsonify, Blueprint,request
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from werkzeug.security import check_password_hash
 from models.user import User
@@ -10,12 +9,12 @@ sessions_api_blueprint = Blueprint('sessions_api', __name__)
 
 
 
-@sessions_api_blueprint.route('/login', methods=['POST'])
+@sessions_api_blueprint.route('/signin', methods=['POST'])
 def create():
     #check if response is even a json 
     if not request.is_json:
         response = {
-            "message": "Some error occurred. Please try again.",
+            "message": "Reponse is not JSON",
             "status": "fail"
         }
         return jsonify(response), 401
@@ -39,7 +38,7 @@ def create():
         result = check_password_hash(user.password, password)
 
         if result:
-            #if there is a result, generate an access token with identity as user's name
+            #if there is a result, generate an access token(JWT) with identity as user's name
             access_token = create_access_token(identity = name)
 
             response = {
@@ -52,7 +51,7 @@ def create():
                 "username": user.name
             }
             }
-            return jsonify(response), 201
+            return jsonify(response), 200
         
         else:
             response = {
