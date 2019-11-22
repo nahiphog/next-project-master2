@@ -1,4 +1,4 @@
-
+from flask import jsonify
 
 def success_200(data):
     return jsonify(data), 200
@@ -17,4 +17,13 @@ def error_401(message):
         "status": "fail"
     }
     return jsonify(response), 401
+
+def error_404(message):
+    response = {
+        "message": message,
+        "status": "fail"
+    }
+    return jsonify(response), 404
+
+
 
