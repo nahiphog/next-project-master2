@@ -138,5 +138,3 @@ def update(user_id):
         return jsonify(response), 401
 
 
-
-
