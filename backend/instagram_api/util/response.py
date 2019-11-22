@@ -1,3 +1,5 @@
+from flask import jsonify
+
 def success_200(data):
     return jsonify(data), 200
 

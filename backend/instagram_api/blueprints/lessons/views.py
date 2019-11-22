@@ -1,5 +1,6 @@
-from flask import Blueprint, jsonify
-from instagram_api.util import *
+from flask import Blueprint, request
+from flask_jwt_extended import jwt_required, get_jwt_identity
+from instagram_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
 
