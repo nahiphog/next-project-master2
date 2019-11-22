@@ -14,11 +14,7 @@ sessions_api_blueprint = Blueprint('sessions_api', __name__)
 def create():
     #check if response is even a json 
     if not request.is_json:
-        response = {
-            "message": "Reponse is not JSON",
-            "status": "fail"
-        }
-        return jsonify(response), 401
+        error_401('Reponse is not a JSON !')
     
     #getting data from front end
     data = request.get_json()
@@ -27,11 +23,7 @@ def create():
 
     #check if name and password field are filled
     if not (name and password):
-        response = {
-            "message": "Some error occurred. Please try again.",
-            "status": "fail"
-        }
-        return jsonify(response), 401
+        error_401('Invalid input!')
 
     user = User.get_or_none(User.name == name)
     #checking passwords if user with provided username exists
@@ -42,23 +34,17 @@ def create():
             #if there is a result, generate an access token(JWT) with identity as user's name
             access_token = create_access_token(identity = name)
 
-            response = {
-            "access_token": access_token,
-            "message": "Successfully signed in.",
-            "status": "success",
-            "user": {
+            data =  {
                 "id": user.id,
                 "profile_picture": user.profile_picture,
-                "username": user.name
+                "username": user.name,
+                "access_token": access_token,
+
             }
-            }
-            return jsonify(response), 200
+            
+            success_201('User credentials are verified for sign in!', data)
         
         else:
-            response = {
-                "message": "Some error occurred. Please try again.",
-                "status": "fail"
-            }
-            return jsonify(response), 401
+            error_401('Some error occurred! Please try again!')
 
 

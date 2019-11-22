@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, request
+from flask import Blueprint, request
 from werkzeug.security import check_password_hash, generate_password_hash
 from flask_jwt_extended import jwt_required, create_access_token, get_jwt_identity
 from instagram_api.util.response import *
@@ -12,7 +12,7 @@ users_api_blueprint = Blueprint('users_api',
 @users_api_blueprint.route('/index', methods=['GET'])
 @jwt_required
 def index(): #returns a list of users from database
-    user =[ 
+    users =[ 
         {
         'id': user.id,
         'name': user.name,
@@ -21,23 +21,20 @@ def index(): #returns a list of users from database
     } for user in User.select()
     ]
 
-    return jsonify(user), 200
+    success_200(users)
 
 
 @users_api_blueprint.route('/signup', methods=['POST'])
 def new():
+    print("debug")
     if not request.is_json:
-        response = {
-            "message": "Reponse is not JSON",
-            "status": "fail"
-        }
-        return jsonify(response), 401
+        return error_401('Response is not JSON!')
 
-    new_user = request.get_json
-
-    name = new_user.name
-    email = new_user.email
-    password = new_user.password
+    new_user = request.get_json()
+    print(new_user)
+    name = new_user['name']
+    email = new_user['email']
+    password = new_user['password']
 
     if name and email and password:
 
@@ -45,78 +42,50 @@ def new():
 
         x = User(name =name, email=email, password=hashed_password)
         if x.save():
-            response = {
-                'status': 'success,',
-                'message': 'Account successfully created!',
-                'user': {
-                    "id": x.id,
-                    "profile_picture": x.profile_picture,
-                    "username": x.name,
-                    'email': x.email
-                }
+            user = {
+                "id": x.id,
+                "profile_picture": x.profile_picture,
+                "username": x.name,
+                'email': x.email
             }
-            return jsonify(response), 200
+            
+            return success_201('Account successfully created!', user)
         
         else:
-            response = {
-            "message": "Oops! Something went wrong when saving user to database!",
-            "status": "fail"
-        }
-        return jsonify(response), 401
+            return error_401('Response is not JSON!')
     
     else:
-        response = {
-                "message": "Invalid input!",
-                "status": "fail"
-            }
-        return jsonify(response), 401
-
+        return error_401('Invalid input!')
 
 @users_api_blueprint.route('/<user_id>', methods=['GET'])
 @jwt_required
 def show(user_id):
-    user = User.get_or_none(User.id == user_id)
+    search_user = User.get_or_none(User.id == user_id)
 
-    response = {
-        user:
-        {'id': user.id,
-        'name': user.name,
-        'email': user.email,
-        'profile_picture': user.profile_picture},
-        'status': 'success',
-        'message':f'Returned details of user with id: {user.id}'
-    }
-
-    return jsonify(response), 200
+    
+    user = {'id': search_user.id, 
+    'name': search_user.name,
+    'email': search_user.email,
+    'profile_picture': search_user.profile_picture}
+    
+    success_201(f'Returned details of user with id: {search_user.id}', user)
 
 @users_api_blueprint.route('/<user_id>', methods=['POST'])
 @jwt_required
 def update(user_id):
     
     if not request.is_json:
-        response = {
-                "message": "Data type is not JSON!",
-                "status": "fail"
-            }
-        return jsonify(response), 401
+        error_401('Response is not JSON!')
         
     user = User.get_or_none(User.id == user_id)
 
     if not user:
-        response = {
-                "message": 'User not found',
-                "status": "fail"
-            }
-        return jsonify(response), 401
+        error_401('User not found!')
 
     jwt_user = get_jwt_identity()
 
     if not jwt_user == user.name:
-        response = {
-                "message": "Unauthorized user!",
-                "status": "fail"
-            }
-        return jsonify(response), 401
+        error_401('Unauthorized user!')
         
 
     user_data = request.get_json
@@ -130,32 +99,49 @@ def update(user_id):
         x = User.update(name=name, email=email, password=hashed_password).where(User.id == user.id)
 
         if x.execute():
-            response = {
-            'message': 'Account updated successfully!',
-            'status': 'success',
-            user: {'id': user.id,
+            
+            user = {'id': user.id,
             'name': user.name,
             'email': user.email,
             'profile_picture': user.profile_picture}
-        }
-
-            return jsonify(response), 200
         
+            success_201('Account updated successfully!', user)
+
         else:
-            response = {
-                "message": "Oops! Something went wrong in updating user details!",
-                "status": "fail"
-            }
-        return jsonify(response), 401
+            error_401('Something went wrong when updating user details!')
 
+ 
+# @users_api_blueprint.route('/<user_id>', methods=['POST'])
+# @jwt_required
+# def update_profile_pic(user_id):
+    
+#     jwt_user = get_jwt_identity()
+#     user = User.get_or_none(User.name == jwt_user)
 
-@users_api_blueprint.route('/<user_id>', methods=['POST'])
-@jwt_required
-def update_profile_pic(user_id):
-    user = User.get_or_none(User.id == user_id)
+#     if user:
+#         image_file = request.files
 
-    if not user:
+#         if image_file:
+#             x = User.update(User.profile_picture = image_file.name).where(User.id == user.id) 
 
+#             if x.execute():
+
+#                 data = {
+#                 'id': user.id,
+#                 'name': user.name,
+#                 'email': user.email,
+#                 'profile_picture': user.profile_picture
+#                 }
+
+#                 success_201('Profile image successfully updated', data)
+
+#             else:
+#                 error_401('Invalid file input!')            
+
+#     else:
+#         error_401('User not found!')
+
+    
 
 
 

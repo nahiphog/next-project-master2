@@ -117,7 +117,7 @@ def update(lesson_id):
 
     # Check title and description and then create new lesson
     if title and description:
-        lesson = Lesson.update(title=title, description=description).where(Lesson.id==lesson_id).execute():
+        lesson = Lesson.update(title=title, description=description).where(Lesson.id==lesson_id).execute()
         if lesson:
             success_201("Update lesson successfully", lesson)
         else:

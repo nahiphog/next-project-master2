@@ -6,7 +6,7 @@ from sqlalchemy.ext.hybrid import hybrid_property
 
 
 class User(BaseModel, UserMixin):
-    name=pw.CharField(uniue=False, null=False)
+    name=pw.CharField(unique=False, null=False)
     email = pw.CharField(unique=True, null=False)
     password = pw.CharField(null=False)
     profile_picture = pw.CharField(default='https://www.medaid.co.uk/wp-content/uploads/2019/04/default.jpg')
