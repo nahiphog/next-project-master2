@@ -1,3 +1,4 @@
+/* Import package components */
 import React from "react";
 import useStores from "../hooks/useStores";
 import { observer } from "mobx-react";
