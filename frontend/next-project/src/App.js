@@ -1,19 +1,42 @@
 /* Import package components */
-import React from "react";
-import "./App.css";
+import React, { useState } from "react";
+import { Grid, CssBaseline } from "@material-ui/core";
 
 /* Import app components */
-import TestMobx from "./test/TestMobx";
-import TestHooks from "./test/TestHooks";
+import TopNav from "./components/TopNav";
+import Content from "./components/Content";
+import BotNav from "./components/BotNav";
 
-class App extends React.Component {
-  render() {
-    return (
-      <>
-        <TestHooks />
-        {/* <TestMobx /> */}
-      </>
-    );
+const ContainerStyles = {
+  height: "calc(100vh - 112px)",
+  overflow: "auto",
+  textAlign: "center"
+};
+
+export default function App() {
+  const [tab, setTab] = useState(0);
+
+  function renderView() {
+    switch (tab) {
+      case 0:
+        return <Content message={"Tab 0"} />;
+      case 1:
+        return <Content message={"Tab 1"} />;
+      case 2:
+        return <Content message={"Tab 2"} />;
+      default:
+        return new Error("This view does not exist");
+    }
   }
+
+  return (
+    <>
+      <Grid container direction="column">
+        <TopNav />
+        <div style={ContainerStyles}>{renderView()}</div>
+        <BotNav value={tab} onChange={setTab} />
+      </Grid>
+      <CssBaseline />
+    </>
+  );
 }
-export default App;
