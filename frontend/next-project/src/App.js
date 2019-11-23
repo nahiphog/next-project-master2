@@ -1,15 +1,14 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import "./App.css";
+import TestMobx from "./test/TestMobx";
 
-
-class App extends React.Component{
-
-  render(){
-
-    return(
-      <h1>Hello world</h1>
-    )
+class App extends React.Component {
+  render() {
+    return (
+      <>
+        <TestMobx />
+      </>
+    );
   }
 }
 export default App;
