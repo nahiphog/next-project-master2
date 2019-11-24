@@ -1,14 +1,15 @@
 /* Import package components */
 import React, { useState } from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
-import { IconButton, Dialog, Slide } from "@material-ui/core";
-import { KeyboardBackspace } from "@material-ui/icons";
+import { Dialog, Slide } from "@material-ui/core";
 import { route } from "./global";
 
 /* Import app components */
 import TopNav from "./components/TopNav";
 import Content from "./components/Content";
 import BotNav from "./components/BotNav";
+import SubTopNav from "./components/SubTopNav";
+import SubContent from "./components/SubContent";
 
 const ContainerStyles = {
   height: "calc(100vh - 112px)",
@@ -23,12 +24,14 @@ const SlideTransition = React.forwardRef(function Transition(props, ref) {
 export default function App() {
   const [tab, setTab] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const RouteTo = option => {
+  const [routeOption, setRouteOption] = useState(-1);
+  const routeTo = option => {
     console.log("option: ", option);
     if (option === route.back) {
       setDialogOpen(false);
     } else {
       setDialogOpen(true);
+      setRouteOption(option);
     }
   };
 
@@ -48,7 +51,7 @@ export default function App() {
   return (
     <>
       <Grid container direction="column">
-        <TopNav RouteTo={RouteTo} />
+        <TopNav routeTo={routeTo} />
         <div style={ContainerStyles}>{renderView()}</div>
         <BotNav value={tab} onChange={setTab} />
       </Grid>
@@ -57,9 +60,8 @@ export default function App() {
         fullScreen
         TransitionComponent={SlideTransition}
       >
-        <IconButton onClick={() => RouteTo(route.back)}>
-          <KeyboardBackspace />
-        </IconButton>
+        <SubTopNav routeTo={routeTo} routeOption={routeOption} />
+        <SubContent routeTo={routeTo} routeOption={routeOption} />
       </Dialog>
       <CssBaseline />
     </>

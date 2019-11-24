@@ -10,7 +10,7 @@ import {
 import { Menu } from "@material-ui/icons";
 import { route } from "../global";
 
-export default function TopNav({ RouteTo }) {
+export default function TopNav({ routeTo }) {
   const [open, setOpen] = useState(false);
 
   return (
@@ -21,7 +21,7 @@ export default function TopNav({ RouteTo }) {
             <Menu />
           </IconButton>
           <div style={{ flexGrow: 1 }} />
-          <Avatar onClick={() => RouteTo(route.profile)}>S</Avatar>
+          <Avatar onClick={() => routeTo(route.profile)}>S</Avatar>
         </Toolbar>
         <SwipeableDrawer
           open={open}
