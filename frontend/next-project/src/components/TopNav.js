@@ -21,7 +21,7 @@ export default function TopNav({ routeTo }) {
             <Menu />
           </IconButton>
           <div style={{ flexGrow: 1 }} />
-          <Avatar onClick={() => routeTo(route.profile)}>S</Avatar>
+          <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar>
         </Toolbar>
         <SwipeableDrawer
           open={open}
