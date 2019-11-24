@@ -5,19 +5,13 @@ import {
   Toolbar,
   Avatar,
   IconButton,
-  SwipeableDrawer,
-  Dialog,
-  Slide
+  SwipeableDrawer
 } from "@material-ui/core";
-import { Menu, KeyboardBackspace } from "@material-ui/icons";
+import { Menu } from "@material-ui/icons";
+import { route } from "../global";
 
-const SlideTransition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
-export default function TopNav() {
+export default function TopNav({ RouteTo }) {
   const [open, setOpen] = useState(false);
-  const [dialogOpen, setDialogOpen] = useState(false);
 
   return (
     <>
@@ -27,7 +21,7 @@ export default function TopNav() {
             <Menu />
           </IconButton>
           <div style={{ flexGrow: 1 }} />
-          <Avatar onClick={() => setDialogOpen(true)}>S</Avatar>
+          <Avatar onClick={() => RouteTo(route.profile)}>S</Avatar>
         </Toolbar>
         <SwipeableDrawer
           open={open}
@@ -38,15 +32,6 @@ export default function TopNav() {
         >
           <span>Hello</span>
         </SwipeableDrawer>
-        <Dialog
-          open={dialogOpen}
-          fullScreen
-          TransitionComponent={SlideTransition}
-        >
-          <IconButton onClick={() => setDialogOpen(false)}>
-            <KeyboardBackspace />
-          </IconButton>
-        </Dialog>
       </AppBar>
     </>
   );

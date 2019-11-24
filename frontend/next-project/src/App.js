@@ -1,6 +1,9 @@
 /* Import package components */
 import React, { useState } from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
+import { IconButton, Dialog, Slide } from "@material-ui/core";
+import { KeyboardBackspace } from "@material-ui/icons";
+import { route } from "./global";
 
 /* Import app components */
 import TopNav from "./components/TopNav";
@@ -13,8 +16,21 @@ const ContainerStyles = {
   textAlign: "center"
 };
 
+const SlideTransition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 export default function App() {
   const [tab, setTab] = useState(0);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const RouteTo = option => {
+    console.log("option: ", option);
+    if (option === route.back) {
+      setDialogOpen(false);
+    } else {
+      setDialogOpen(true);
+    }
+  };
 
   function renderView() {
     switch (tab) {
@@ -32,10 +48,19 @@ export default function App() {
   return (
     <>
       <Grid container direction="column">
-        <TopNav />
+        <TopNav RouteTo={RouteTo} />
         <div style={ContainerStyles}>{renderView()}</div>
         <BotNav value={tab} onChange={setTab} />
       </Grid>
+      <Dialog
+        open={dialogOpen}
+        fullScreen
+        TransitionComponent={SlideTransition}
+      >
+        <IconButton onClick={() => RouteTo(route.back)}>
+          <KeyboardBackspace />
+        </IconButton>
+      </Dialog>
       <CssBaseline />
     </>
   );
