@@ -1,6 +1,7 @@
 import os
 import config
 from flask import Flask
+from flask_jwt_extended import JWTManager
 from models.base_model import db
 from flask_login import LoginManager
 from models.user import User
@@ -15,6 +16,9 @@ login_manager.init_app(app)
 login_manager.login_view = 'sessions.new'
 login_manager.login_message = 'Please login before proceeding...'
 login_manager.login_message_category = "warning"
+
+jwt = JWTManager(app)
+
 
 if os.getenv('FLASK_ENV') == 'production':
     app.config.from_object("config.ProductionConfig")

@@ -10,7 +10,7 @@ sessions_api_blueprint = Blueprint('sessions_api', __name__)
 def create():
     # Check for valid json
     if not request.is_json:
-       return error_401("Reponse is not JSON")
+        return error_401("Reponse is not JSON")
     
     # Retrieve data from json
     data = request.get_json()
