@@ -6,7 +6,7 @@ from werkzeug.security import check_password_hash, generate_password_hash
 
 users_api_blueprint = Blueprint('users_api', __name__)
 
-@users_api_blueprint.route('/index', methods=['GET'])
+@users_api_blueprint.route('/', methods=['GET'])
 def index():
     # Check for valid json
     if not request.is_json:
@@ -73,8 +73,8 @@ def show(user_id):
         'name': user.name,
         'email': user.email,
         'profile_picture': user.profile_picture
-    }    
-    return success_201(f'Returned details of user with id: {data.id}', data)
+    } 
+    return success_201(f"Returned details of user with id: {data['id']}", data)
 
 @users_api_blueprint.route('/<user_id>', methods=['POST'])
 @jwt_required
@@ -96,21 +96,21 @@ def update(user_id):
        return error_401('Unauthorized user!')
 
     # Retrieve data from json
-    data = request.get_json
+    data = request.get_json()
 
-    name = data.name
-    email = data.email
-    password = data.password
+    name = data['name']
+    email = data['email']
+    password = data['password']
 
     # Update user details in database
     if name and email and password:
         hashed_password = generate_password_hash(password)
-        user = User.update(name=name, email=email, password=hashed_password).where(User.id == user.id)
-        if user.execute():            
+        query = User.update(name=name, email=email, password=hashed_password).where(User.id == user.id)
+        if query.execute():            
             data = {
                 'id': user.id,
-                'name': user.name,
-                'email': user.email,
+                'name': name,
+                'email': email,
                 'profile_picture': user.profile_picture
             }        
             return success_201('Updated user details successfully!', data)
