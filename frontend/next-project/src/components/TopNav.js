@@ -43,7 +43,16 @@ export default function TopNav() {
           disableSwipeToOpen={false}
           PaperProps={{ style: { minWidth: "50vw" } }}
         >
-          <span onClick={() => routeTo(route.learnListPage)}>Hello</span>
+          <span onClick={() => routeTo(route.learnListPage)}>
+            Link to Learn List Page
+          </span>
+          <span onClick={() => routeTo(route.teachListPage)}>
+            Link to Teach List Page
+          </span>
+
+          <span onClick={() => routeTo(route.bookmarkListPage)}>
+            Link to Bookmarks Page
+          </span>
         </SwipeableDrawer>
       </AppBar>
       <DialogPage
