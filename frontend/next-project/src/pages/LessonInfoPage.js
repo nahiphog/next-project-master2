@@ -11,6 +11,7 @@ import {
 import { makeStyles } from "@material-ui/core/styles";
 import { red } from "@material-ui/core/colors";
 
+/* CSS Styles */
 const useStyles = makeStyles(theme => ({
   card: {
     maxWidth: 345

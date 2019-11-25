@@ -1,8 +1,13 @@
-import React from "react";
+/* Import package components */
+import React, { useState } from "react";
 import Rating from "@material-ui/lab/Rating";
-import Typography from "@material-ui/core/Typography";
-import Box from "@material-ui/core/Box";
+import { Typography, Box } from "@material-ui/core";
+import { route } from "../global";
 
+/* Import app components */
+import DialogPage from "../components/DialogPage";
+
+/* CSS Styles */
 const parentDiv = {
   display: "flex",
   flexDirection: "row",
@@ -27,7 +32,17 @@ const pStyling = {
 };
 
 export default function LearnListPage(props) {
-  const [value, setValue] = React.useState(2);
+  const value = 2;
+  const [routeOption, setRouteOption] = useState(route.close);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const routeTo = option => {
+    if (option === route.close) {
+      setDialogOpen(false);
+    } else {
+      setDialogOpen(true);
+    }
+    setRouteOption(option);
+  };
   return (
     <div>
       <div style={{ width: "100vw" }}>
@@ -56,7 +71,11 @@ export default function LearnListPage(props) {
           </button>
         </form>
       </div>
-      <div style={parentDiv} id="cardBox">
+      <div
+        style={parentDiv}
+        id="cardBox"
+        onClick={() => routeTo(route.lessonPage)}
+      >
         <img
           style={imgSizing}
           src="https://atasouthport.com/wp-content/uploads/2017/04/default-image.jpg"
@@ -69,7 +88,7 @@ export default function LearnListPage(props) {
             component="fieldset"
             mb={3}
             borderColor="transparent"
-            style={{ margin: "0", padding: "0", border:'none' }}
+            style={{ margin: "0", padding: "0", border: "none" }}
           >
             <Typography
               component="legend"
@@ -81,6 +100,11 @@ export default function LearnListPage(props) {
           </Box>
         </div>
       </div>
+      <DialogPage
+        routeTo={routeTo}
+        routeOption={routeOption}
+        dialogOpen={dialogOpen}
+      />
     </div>
   );
 }
