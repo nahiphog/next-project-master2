@@ -12,9 +12,9 @@ export const route = {
   createLearnPage: 10,
   createTeachPage: 11,
   createEventPage: 12,
-  ratingPage: 13
+  ratingPage: 13,
+  todo: 14
 };
-
 
 export const subTitle = [
   "Close", //0
@@ -30,5 +30,6 @@ export const subTitle = [
   "Create Lesson", //10
   "Create Lesson", //11
   "Create Event", //12
-  "Rating" //13
+  "Rating", //13
+  "Todo" //14
 ];

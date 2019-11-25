@@ -26,7 +26,7 @@ export default function Content() {
           size="large"
           aria-label="large outlined secondary button group"
         >
-          <Button onClick={() => routeTo(route.inboxListPage)}>Inbox</Button>
+          <Button onClick={() => routeTo(route.lessonPage)}>Lesson</Button>
           <Button onClick={() => routeTo(route.eventListPage)}>Event</Button>
           <Button onClick={() => routeTo(route.teachListPage)}>Teach</Button>
         </ButtonGroup>

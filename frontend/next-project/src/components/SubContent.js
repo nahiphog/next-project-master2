@@ -1,6 +1,7 @@
 /* Import package components */
 import React from "react";
 import { route } from "../global";
+import LessonPage from "../pages/LessonPage";
 
 /* Import app components */
 import InboxListPage from "../pages/InboxListPage";
@@ -36,7 +37,7 @@ export default function SubContent({ routeOption }) {
       case route.profilePage:
         return <p>todo: profilePage</p>;
       case route.lessonPage:
-        return <p>todo: lessonPage</p>;
+        return <LessonPage />;
       case route.createLearnPage:
         return <p>todo: createLearnPage</p>;
       case route.createTeachPage:
@@ -45,6 +46,8 @@ export default function SubContent({ routeOption }) {
         return <p>todo: createEventPage</p>;
       case route.ratingPage:
         return <p>todo: ratingPage</p>;
+      case route.todo:
+        return <p>todo: please complete this component/page</p>;
       default:
         return new Error("This view does not exist");
     }
