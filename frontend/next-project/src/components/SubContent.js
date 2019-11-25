@@ -4,6 +4,7 @@ import { route } from "../global";
 
 /* Import app components */
 import InboxListPage from "../pages/InboxListPage";
+import LearnListPage from "../pages/LearnListPage";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -25,7 +26,7 @@ export default function SubContent({ routeOption }) {
       case route.teachListPage:
         return <p>todo: teachList</p>;
       case route.learnListPage:
-        return <p>todo: learnList</p>;
+        return <LearnListPage />;
       case route.bookmarkListPage:
         return <p>todo: bookmarkList</p>;
       case route.signinPage:
