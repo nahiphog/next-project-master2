@@ -2,7 +2,7 @@
 import React, { useState } from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
 import { Dialog, Slide } from "@material-ui/core";
-import { route } from "./global";
+import route from "./global";
 
 /* Import app components */
 import TopNav from "./components/TopNav";
@@ -25,6 +25,7 @@ export default function App() {
   const [tab, setTab] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [routeOption, setRouteOption] = useState(-1);
+
   const routeTo = option => {
     console.log("option: ", option);
     if (option === route.back) {

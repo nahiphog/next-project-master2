@@ -30,7 +30,7 @@ export default function TopNav({ routeTo }) {
           disableSwipeToOpen={false}
           PaperProps={{ style: { minWidth: "50vw" } }}
         >
-          <span>Hello</span>
+          <span onClick={() => routeTo(route.learnList)}>Hello</span>
         </SwipeableDrawer>
       </AppBar>
     </>

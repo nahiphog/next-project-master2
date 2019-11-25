@@ -15,6 +15,7 @@ export const route = {
   ratingPage: 13
 };
 
+
 export const subTitle = [
   "Back", //0
   "Inbox", //1
