@@ -10,8 +10,21 @@ import {
 import { Menu } from "@material-ui/icons";
 import { route } from "../global";
 
-export default function TopNav({ routeTo }) {
+/* Import app components */
+import DialogPage from "../components/DialogPage";
+
+export default function TopNav() {
   const [open, setOpen] = useState(false);
+  const [routeOption, setRouteOption] = useState(route.close);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const routeTo = option => {
+    if (option === route.close) {
+      setDialogOpen(false);
+    } else {
+      setDialogOpen(true);
+    }
+    setRouteOption(option);
+  };
 
   return (
     <>
@@ -21,7 +34,7 @@ export default function TopNav({ routeTo }) {
             <Menu />
           </IconButton>
           <div style={{ flexGrow: 1 }} />
-          <Avatar onClick={() => routeTo(route.profile)}>S</Avatar>
+          <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar>
         </Toolbar>
         <SwipeableDrawer
           open={open}
@@ -30,9 +43,23 @@ export default function TopNav({ routeTo }) {
           disableSwipeToOpen={false}
           PaperProps={{ style: { minWidth: "50vw" } }}
         >
-          <span>Hello</span>
+          <span onClick={() => routeTo(route.learnListPage)}>
+            Link to Learn List Page
+          </span>
+          <span onClick={() => routeTo(route.teachListPage)}>
+            Link to Teach List Page
+          </span>
+
+          <span onClick={() => routeTo(route.bookmarkListPage)}>
+            Link to Bookmarks Page
+          </span>
         </SwipeableDrawer>
       </AppBar>
+      <DialogPage
+        routeTo={routeTo}
+        routeOption={routeOption}
+        dialogOpen={dialogOpen}
+      />
     </>
   );
 }
