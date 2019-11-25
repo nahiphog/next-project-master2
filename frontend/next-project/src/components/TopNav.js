@@ -10,8 +10,21 @@ import {
 import { Menu } from "@material-ui/icons";
 import { route } from "../global";
 
-export default function TopNav({ routeTo }) {
+/* Import app components */
+import DialogPage from "../components/DialogPage";
+
+export default function TopNav() {
   const [open, setOpen] = useState(false);
+  const [routeOption, setRouteOption] = useState(route.close);
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const routeTo = option => {
+    if (option === route.close) {
+      setDialogOpen(false);
+    } else {
+      setDialogOpen(true);
+    }
+    setRouteOption(option);
+  };
 
   return (
     <>
@@ -33,6 +46,11 @@ export default function TopNav({ routeTo }) {
           <span>Hello</span>
         </SwipeableDrawer>
       </AppBar>
+      <DialogPage
+        routeTo={routeTo}
+        routeOption={routeOption}
+        dialogOpen={dialogOpen}
+      />
     </>
   );
 }

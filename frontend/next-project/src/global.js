@@ -1,10 +1,10 @@
 export const route = {
-  back: 0,
-  inboxList: 1,
-  eventList: 2,
-  teachList: 3,
-  learnList: 4,
-  bookmarkList: 5,
+  close: 0,
+  inboxListPage: 1,
+  eventListPage: 2,
+  teachListPage: 3,
+  learnListPage: 4,
+  bookmarkListPage: 5,
   signinPage: 6,
   signupPage: 7,
   profilePage: 8,
@@ -16,7 +16,7 @@ export const route = {
 };
 
 export const subTitle = [
-  "Back", //0
+  "Close", //0
   "Inbox", //1
   "Event", //2
   "Teach", //3

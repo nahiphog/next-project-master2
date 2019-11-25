@@ -1,12 +1,12 @@
 /* Import package components */
 import React, { useState } from "react";
-import { Grid, Button, ButtonGroup } from "@material-ui/core";
+import { Button, ButtonGroup } from "@material-ui/core";
 import { route } from "../global";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 
-export default function Content() {
+export default function InboxListPage() {
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -19,18 +19,15 @@ export default function Content() {
   };
   return (
     <>
-      <h1>Content</h1>
-      <Grid item>
-        <ButtonGroup
-          color="secondary"
-          size="large"
-          aria-label="large outlined secondary button group"
-        >
-          <Button onClick={() => routeTo(route.inboxListPage)}>Inbox</Button>
-          <Button onClick={() => routeTo(route.eventListPage)}>Event</Button>
-          <Button onClick={() => routeTo(route.teachListPage)}>Teach</Button>
-        </ButtonGroup>
-      </Grid>
+      <ButtonGroup
+        color="secondary"
+        size="large"
+        aria-label="large outlined secondary button group"
+      >
+        <Button onClick={() => routeTo(route.inboxListPage)}>Inbox</Button>
+        <Button onClick={() => routeTo(route.eventListPage)}>Event</Button>
+        <Button onClick={() => routeTo(route.teachListPage)}>Teach</Button>
+      </ButtonGroup>
       <DialogPage
         routeTo={routeTo}
         routeOption={routeOption}

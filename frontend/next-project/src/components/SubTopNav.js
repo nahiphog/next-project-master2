@@ -5,12 +5,11 @@ import { KeyboardBackspace } from "@material-ui/icons";
 import { route, subTitle } from "../global";
 
 export default function SubTopNav({ routeTo, routeOption }) {
-  console.log("routeOption: ", routeOption);
   return (
     <>
-      <IconButton onClick={() => routeTo(route.back)}>
+      <IconButton onClick={() => routeTo(route.close)}>
         <KeyboardBackspace />
-        {subTitle[routeOption]}
+        <strong>{subTitle[routeOption]}</strong>
       </IconButton>
     </>
   );

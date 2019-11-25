@@ -2,18 +2,31 @@
 import React from "react";
 import { route } from "../global";
 
-export default function SubContent({ routeTo, routeOption }) {
+/* Import app components */
+import InboxListPage from "../pages/InboxListPage";
+
+/* CSS Styles */
+const ContainerStyles = {
+  height: "calc(100vh - 56px)",
+  width: "100vw",
+  overflow: "auto",
+  textAlign: "center"
+};
+
+export default function SubContent({ routeOption }) {
   function renderView() {
     switch (routeOption) {
-      case route.inboxList:
-        return <p>todo: inboxList</p>;
-      case route.eventList:
+      case route.close:
+        return <p>todo: close</p>;
+      case route.inboxListPage:
+        return <InboxListPage />;
+      case route.eventListPage:
         return <p>todo: eventList</p>;
-      case route.teachList:
+      case route.teachListPage:
         return <p>todo: teachList</p>;
-      case route.learnList:
+      case route.learnListPage:
         return <p>todo: learnList</p>;
-      case route.bookmarkList:
+      case route.bookmarkListPage:
         return <p>todo: bookmarkList</p>;
       case route.signinPage:
         return <p>todo: signinPage</p>;
@@ -38,8 +51,7 @@ export default function SubContent({ routeTo, routeOption }) {
 
   return (
     <>
-      <p>Sub content</p>
-      <div>{renderView()}</div>
+      <div style={ContainerStyles}>{renderView()}</div>
     </>
   );
 }
