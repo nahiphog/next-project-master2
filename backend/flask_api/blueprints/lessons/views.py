@@ -15,35 +15,41 @@ def create():
 
     # Check if user exists and signed in
     jwt_user = get_jwt_identity()
-    user = User.get_or_none(User.id == jwt_user.username)
-
+    user = User.get_or_none(User.name == jwt_user)
     if not user:
        return error_401("Unauthorized action")
 
     # Retrieve data from json
-    data = request.get_json
 
-    title = data.title
-    description = data.description
-    if data.teach:
+    data = request.get_json()
+    print(data)
+
+    title = data['title'] 
+    description = data['description'] 
+    if (str(data['teach']) == "True"):
         teach = True
-    else:
+    elif (str(data['teach']) == "False"):
         teach = False
-    skill_tags = data.skill_tags # TODO: decide later how to handle
+    else:
+        return error_401("Invalid teach input")
+    skill_tags = data['skill_tags'] # TODO: decide later how to handle #### Added bracket here too
 
     # Check title and description and then create new lesson
     if title and description:
-        lesson = Lesson(title=title, description=description, teach=teach, owner=user)        
+
+        lesson = Lesson(title=title, description=description, teach=teach, owner=user)
+
+        print(lesson) 
         if lesson.save():
             lesson = {
                 'id': lesson.id,
-                'title': lesson.title,
-                'description': lesson.description,
-                'rating': lesson.rating,
-                'teach': lesson.teach,
-                'owner': lesson.user
+                'title': title,
+                'description': description,
+                'rating': 0,
+                'teach': teach,
+                'owner': user.id
             }
-            return success_201("New lesson is successfully create", lesson)
+            return success_201("New lesson created successfully", lesson) 
         else:
             return error_401("Create lesson failed")    
     else:
@@ -54,8 +60,8 @@ def create():
 def index():
     # Check if user exists and signed in
     jwt_user = get_jwt_identity()
-    user = User.get_or_none(User.id == jwt_user.username)
 
+    user = User.get_or_none(User.name == jwt_user)
     if not user:
         return error_401("Unauthorized action")
 
@@ -81,16 +87,25 @@ def index():
 def show(lesson_id):
     # Check if user exists and signed in
     jwt_user = get_jwt_identity()
-    user = User.get_or_none(User.id == jwt_user.username)
+    user = User.get_or_none(User.name == jwt_user)
 
     if not user:
        return error_401("Unauthorized action")
 
     # Retrieve particular lesson from database
-    lesson = Lesson.select().where(Lesson.id == lesson_id)
+    # lesson = Lesson.select().where(Lesson.id == lesson_id)
+    lesson = Lesson.get_or_none(Lesson.id == lesson_id)
 
     if lesson:
-        return success_200(lesson)
+        data = {
+            'id': lesson.id,
+            'title': lesson.title,
+            'description': lesson.description,
+            'rating': lesson.rating,
+            'teach': lesson.teach,
+            'owner': lesson.owner.id
+        }
+        return success_200(data)
     else:
         return error_404("Lesson does not exist")
 
@@ -103,17 +118,17 @@ def update(lesson_id):
 
     # Check if user exists and signed in
     jwt_user = get_jwt_identity()
-    user = User.get_or_none(User.id == jwt_user.username)
+    user = User.get_or_none(User.name == jwt_user) 
 
     if not user:
         return error_401("Unauthorized action")
 
     # Retrieve data from json
-    data = request.get_json
 
-    title = data.title
-    description = data.description
+    data = request.get_json()
 
+    title = data['title']
+    description = data['description']
     # Check title and description and then create new lesson
     if title and description:
         lesson = Lesson.update(title=title, description=description).where(Lesson.id==lesson_id).execute()
