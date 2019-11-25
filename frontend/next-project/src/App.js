@@ -1,27 +1,26 @@
 /* Import package components */
-import React, { useState } from "react";
+import React from "react";
 import { Grid, CssBaseline } from "@material-ui/core";
+<<<<<<< HEAD
 import { Dialog, Slide } from "@material-ui/core";
 import route from "./global";
+=======
+>>>>>>> ccc96023b398acf366590f8f892636c54f224809
 
 /* Import app components */
 import TopNav from "./components/TopNav";
 import Content from "./components/Content";
-import BotNav from "./components/BotNav";
-import SubTopNav from "./components/SubTopNav";
-import SubContent from "./components/SubContent";
 
+/* CSS Styles */
 const ContainerStyles = {
-  height: "calc(100vh - 112px)",
+  height: "calc(100vh - 56px)",
+  width: "100vw",
   overflow: "auto",
   textAlign: "center"
 };
 
-const SlideTransition = React.forwardRef(function Transition(props, ref) {
-  return <Slide direction="up" ref={ref} {...props} />;
-});
-
 export default function App() {
+<<<<<<< HEAD
   const [tab, setTab] = useState(0);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [routeOption, setRouteOption] = useState(-1);
@@ -49,21 +48,16 @@ export default function App() {
     }
   }
 
+=======
+>>>>>>> ccc96023b398acf366590f8f892636c54f224809
   return (
     <>
       <Grid container direction="column">
-        <TopNav routeTo={routeTo} />
-        <div style={ContainerStyles}>{renderView()}</div>
-        <BotNav value={tab} onChange={setTab} />
+        <TopNav />
+        <div style={ContainerStyles}>
+          <Content />
+        </div>
       </Grid>
-      <Dialog
-        open={dialogOpen}
-        fullScreen
-        TransitionComponent={SlideTransition}
-      >
-        <SubTopNav routeTo={routeTo} routeOption={routeOption} />
-        <SubContent routeTo={routeTo} routeOption={routeOption} />
-      </Dialog>
       <CssBaseline />
     </>
   );
