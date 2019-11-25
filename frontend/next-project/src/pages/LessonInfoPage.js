@@ -39,7 +39,7 @@ export default function LessonInfoPage() {
   const classes = useStyles();
   return (
     <>
-      <Card className={classes.card}>
+      <Card>
         <CardMedia
           className={classes.media}
           image="https://miro.medium.com/max/1272/1*M9le42saJxWlOYyYvhKtPA.jpeg"

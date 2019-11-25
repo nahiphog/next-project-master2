@@ -1,6 +1,6 @@
 /* Import package components */
 import React, { useState } from "react";
-import { Container, Button, ButtonGroup, Grid } from "@material-ui/core";
+import { Container, Button, ButtonGroup } from "@material-ui/core";
 import { route } from "../global";
 
 /* Import app components */
@@ -11,8 +11,7 @@ import LessonInfoPage from "../pages/LessonInfoPage";
 const ContainerStyles = {
   display: "flex",
   flexDirection: "column",
-  alignItems: "center",
-  maxWidth: 345
+  alignItems: "center"
 };
 
 export default function LessonPage() {
@@ -33,7 +32,9 @@ export default function LessonPage() {
         <ButtonGroup fullWidth aria-label="full width button group">
           <Button onClick={() => routeTo(route.todo)}>Bookmark</Button>
           <Button onClick={() => routeTo(route.todo)}>Chat</Button>
-          <Button onClick={() => routeTo(route.todo)}>Request</Button>
+          <Button onClick={() => routeTo(route.createEventPage)}>
+            Request
+          </Button>
         </ButtonGroup>
       </Container>
       <DialogPage

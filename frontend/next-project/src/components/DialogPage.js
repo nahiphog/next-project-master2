@@ -19,7 +19,7 @@ export default function DialogPage({ routeTo, routeOption, dialogOpen }) {
         TransitionComponent={SlideTransition}
       >
         <SubTopNav routeTo={routeTo} routeOption={routeOption} />
-        <SubContent routeOption={routeOption} />
+        <SubContent routeTo={routeTo} routeOption={routeOption} />
       </Dialog>
     </>
   );

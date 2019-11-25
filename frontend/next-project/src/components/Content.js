@@ -1,6 +1,6 @@
 /* Import package components */
 import React, { useState } from "react";
-import { Grid, Button, ButtonGroup } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { route } from "../global";
 
 /* Import app components */

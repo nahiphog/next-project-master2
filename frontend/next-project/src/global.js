@@ -17,7 +17,7 @@ export const route = {
 };
 
 export const subTitle = [
-  "Close", //0
+  "", //0
   "Inbox", //1
   "Event", //2
   "Teach", //3
