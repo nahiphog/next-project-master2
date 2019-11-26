@@ -48,13 +48,16 @@ export default function TopNav() {
 
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="static" style={{ backgroundColor: "#1589FF"}}>
         <Toolbar>
           <IconButton color="inherit" onClick={() => setOpen(!open)}>
-            <Menu />
+            <Menu style={{ fontSize: "30px" }}  />
           </IconButton>
           <div style={{ flexGrow: 1 }} />
-          <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar>
+          {/* <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar> */}
+                    <IconButton color="inherit" onClick={() => routeTo(route.profilePage)}>
+            <AccountCircleIcon style={{ fontSize: "33px" }} />
+          </IconButton>
         </Toolbar>
         <SwipeableDrawer
           open={open}
