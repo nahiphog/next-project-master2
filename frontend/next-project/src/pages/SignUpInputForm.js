@@ -1,5 +1,5 @@
 /* Import package components */
-import React, { useState } from "react";
+import React from "react";
 import { Container, TextField } from "@material-ui/core";
 
 export default function SignUpInputForm() {
