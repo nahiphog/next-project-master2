@@ -143,7 +143,7 @@ def update(lesson_id):
 
 @lessons_api_blueprint.route('/search_lessons', methods=['GET'])
 # @jwt_required
-def delete():
+def search_lessons():
 
     search_value = request.args['search_value']
     print(search_value)
