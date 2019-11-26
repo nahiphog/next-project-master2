@@ -43,12 +43,15 @@ def new():
         # Hash password and save user to database
         hashed_password = generate_password_hash(password)
         user = User(name =name, email=email, password=hashed_password)
-        if user.save():
+        if user.save():            
+            # Generate an access token(JWT) with identity as user's name
+            access_token = create_access_token(identity = name)
             data = {
                 "id": user.id,
                 "profile_picture": user.profile_picture,
                 "name": user.name,
-                'email': user.email
+                'email': user.email,
+                "access_token": access_token
             }            
             return success_201('Created account successfully', data)
         else:
@@ -70,22 +73,22 @@ def show(user_id):
 
 @users_api_blueprint.route('/<user_id>', methods=['POST'])
 @jwt_required
-def update(user_id):    
+def update(user_id):
     # Check for valid json
     if not request.is_json:
-       return error_401('Response is not JSON!')
+        return error_401('Response is not JSON!')
 
     # Check if user exists
     user = User.get_or_none(User.id == user_id)
 
     if not user:
-       return error_401('User not found!')
+        return error_401('User not found!')
 
     # Check whether user signed in matched with user_id
     jwt_user = get_jwt_identity()
 
     if not jwt_user == user.name:
-       return error_401('Unauthorized user!')
+        return error_401('Unauthorized user!')
 
     # Retrieve data from json
     data = request.get_json()
@@ -108,6 +111,8 @@ def update(user_id):
             return success_201('Updated user details successfully!', data)
         else:
             return error_401('Update user details failed!')
+    else:
+        return error_401('User details cannot be empty!')
  
 # @users_api_blueprint.route('/<user_id>', methods=['POST'])
 # @jwt_required

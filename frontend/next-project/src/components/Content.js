@@ -2,12 +2,16 @@
 import React, { useState } from "react";
 import { Grid, Button } from "@material-ui/core";
 import { route } from "../global";
+import useStores from "../hooks/useStores";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
-import { generateData } from "../test/GenerateTestData";
+import { generateData, signin, signout } from "../test/GenerateTestData";
 
 export default function Content() {
+  const {
+    userStore: { currentUser }
+  } = useStores();
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -21,6 +25,8 @@ export default function Content() {
   return (
     <>
       <h1>Content</h1>
+      <h4>User: {currentUser.name}</h4>
+      <h4>ID: {currentUser.id}</h4>
       <Grid item>
         <Button
           variant="outlined"
@@ -114,7 +120,10 @@ export default function Content() {
           Rating
         </Button>
         <Button variant="outlined" color="primary" onClick={generateData}>
-          Generate Database
+          Test AXIOS
+        </Button>
+        <Button variant="outlined" color="primary" onClick={signout}>
+          Sign Out
         </Button>
       </Grid>
       <DialogPage

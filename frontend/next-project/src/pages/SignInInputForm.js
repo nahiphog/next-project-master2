@@ -1,8 +1,8 @@
 /* Import package components */
-import React, { useState } from "react";
+import React from "react";
 import { Container, TextField } from "@material-ui/core";
 
-export default function SignInInputForm({userSignIn , setUserSignIn}) {
+export default function SignInInputForm({ userSignIn, setUserSignIn }) {
   return (
     <>
       <Container maxWidth="sm">
@@ -20,12 +20,12 @@ export default function SignInInputForm({userSignIn , setUserSignIn}) {
           variant="outlined"
           type="name"
           value={userSignIn.name}
-          onChange ={e => setUserSignIn(
-            {
+          onChange={e =>
+            setUserSignIn({
               name: e.target.value,
-              password: userSignIn.password,
-            }
-            )}
+              password: userSignIn.password
+            })
+          }
         />
 
         {/* Password */}
@@ -42,12 +42,12 @@ export default function SignInInputForm({userSignIn , setUserSignIn}) {
           variant="outlined"
           type="password"
           value={userSignIn.password}
-          onChange ={e => setUserSignIn(
-            {
+          onChange={e =>
+            setUserSignIn({
               name: userSignIn.name,
-              password: e.target.value, 
-            }
-            )}
+              password: e.target.value
+            })
+          }
         />
       </Container>
     </>
