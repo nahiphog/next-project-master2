@@ -1,5 +1,5 @@
 /* Import package components */
-import React from "react";
+import React, { useState } from "react";
 import { Button, ButtonGroup } from "@material-ui/core";
 import { route } from "../global";
 
@@ -14,14 +14,23 @@ const ContainerStyles = {
   width: "100%"
 };
 
+
 export default function SignInPage({ parentRouteTo }) {
+  const [userSignIn, setUserSignIn] = useState({
+    name: '',
+    password: '',
+  });
+
+  const handleSignIn = () => {
+    console.log(userSignIn)
+  };
   return (
     <>
       <div style={ContainerStyles}>
-        <SignInInputForm />
+        <SignInInputForm userSignIn = {userSignIn} setUserSignIn={setUserSignIn} />
         <ButtonGroup fullWidth aria-label="full width button group">
           <Button onClick={() => parentRouteTo(route.close)}>Cancel</Button>
-          <Button onClick={() => parentRouteTo(route.close)}>Sign In</Button>
+          <Button onClick={handleSignIn}>Sign In</Button>
         </ButtonGroup>
       </div>
     </>

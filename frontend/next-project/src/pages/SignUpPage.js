@@ -15,13 +15,22 @@ const ContainerStyles = {
 };
 
 export default function SignUpPage({ parentRouteTo }) {
+  const [userSignUp, setUserSignUp] = useState({
+    name: '',
+    email: '',
+    password: '',
+  });
+
+  const handleSignUp = () => {
+    console.log(userSignUp)
+  };
   return (
     <>
       <div style={ContainerStyles}>
-        <SignUpInputForm />
+        <SignUpInputForm userSignUp = {userSignUp} setUserSignUp = { setUserSignUp } />
         <ButtonGroup fullWidth aria-label="full width button group">
           <Button onClick={() => parentRouteTo(route.close)}>Cancel</Button>
-          <Button onClick={() => parentRouteTo(route.close)}>Sign Up</Button>
+          <Button onClick={handleSignUp}>Sign Up</Button>
         </ButtonGroup>
       </div>
     </>

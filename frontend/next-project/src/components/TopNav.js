@@ -10,7 +10,6 @@ import {
   List, ListSubheader, ListItem, ListItemIcon, ListItemText
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import TelegramIcon from '@material-ui/icons/Telegram';
 import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
@@ -26,7 +25,8 @@ import { route } from "../global";
 import DialogPage from "../components/DialogPage";
 
 const iconColor ={
-  color: '#5CB3FF'
+  color: '#5CB3FF',
+  fontSize: '35px'
 }
 
 const backGround ={
@@ -53,7 +53,7 @@ export default function TopNav() {
           <IconButton color="inherit" onClick={() => setOpen(!open)}>
             <Menu style={{ fontSize: "30px" }}  />
           </IconButton>
-          <div style={{ flexGrow: 1, }} />
+          <div style={{ flexGrow: 1 }} />
           {/* <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar> */}
                     <IconButton color="inherit" onClick={() => routeTo(route.profilePage)}>
             <AccountCircleIcon style={{ fontSize: "33px" }} />
@@ -64,7 +64,7 @@ export default function TopNav() {
           onClose={() => setOpen(false)}
           onOpen={() => setOpen(true)}
           disableSwipeToOpen={false}
-          PaperProps={{ style: { minWidth: "50vw" } }}
+          PaperProps={{ style: { minWidth: "65vw" } }}
         >
           {/* <h4>Menu</h4> */}
           <br /><br /><br />
@@ -72,10 +72,11 @@ export default function TopNav() {
           <List component="nav" aria-labelledby="nested-list-subheader"
             subheader={
               <ListSubheader component="div" id="nested-list-subheader" style={backGround} >
-                <ListItem button>
+                <ListItem button >
                   <ListItemIcon>
-                    <AccountCircleIcon style={{ fontSize: 50, color: "#1589FF"}}/>
+                    <AccountCircleIcon style={{ fontSize: "88px" , color: "#1589FF" }}/>
                   </ListItemIcon>
+                  <ListItemText  secondary="Login/Signup" />
               </ListItem>
               </ListSubheader>
           }>
