@@ -10,14 +10,16 @@ import {
   List, ListSubheader, ListItem, ListItemIcon, ListItemText
 } from "@material-ui/core";
 import { Menu } from "@material-ui/icons";
-import FaceIcon from '@material-ui/icons/Face';
-import PersonIcon from '@material-ui/icons/Person';
 import TelegramIcon from '@material-ui/icons/Telegram';
+import MenuBookIcon from '@material-ui/icons/MenuBook';
 import InboxIcon from '@material-ui/icons/Inbox';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import BookmarkIcon from '@material-ui/icons/Bookmark';
-import ImportContactsIcon from '@material-ui/icons/ImportContacts';
+import PeopleIcon from '@material-ui/icons/People';
+import EventIcon from '@material-ui/icons/Event';
+import SettingsIcon from '@material-ui/icons/Settings';
+import InfoIcon from '@material-ui/icons/Info';
 import { route } from "../global";
 
 /* Import app components */
@@ -75,42 +77,54 @@ export default function TopNav() {
               </ListSubheader>
           }>
             <br />
-              <ListItem button onClick={() => routeTo(route.profilePage)}>
+            <ListItem button onClick={() => routeTo(route.signinPage)}>
                 <ListItemIcon>
-                  <PersonIcon style={iconColor} />
+                  <ExitToAppIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText primary="Profile" />
+                <ListItemText secondary="Login/Signup" />
               </ListItem>
               <ListItem button onClick={() => routeTo(route.learnListPage)}>
                 <ListItemIcon>
-                  <ImportContactsIcon style={iconColor}/>
+                  <MenuBookIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText primary="Lesson List" />
+                <ListItemText secondary="Lesson" />
               </ListItem>
               <ListItem button onClick={() => routeTo(route.teachListPage)}>
                 <ListItemIcon>
-                  <FaceIcon style={iconColor}/>
+                  <PeopleIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText primary="Teach List" />
+                <ListItemText secondary="Teach" />
+              </ListItem>
+              <ListItem button onClick={() => routeTo(route.eventListPage)}>
+                <ListItemIcon>
+                  <EventIcon style={iconColor} />
+                </ListItemIcon>
+                <ListItemText secondary="Event" />
               </ListItem>
               <ListItem button onClick={() => routeTo(route.bookmarkListPage)}>
                 <ListItemIcon>
                   <BookmarkIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText primary="Bookmark List" />
+                <ListItemText secondary="Bookmark List" />
               </ListItem>
               <ListItem button onClick={() => routeTo(route.inboxListPage)}>
                 <ListItemIcon>
                   <InboxIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText primary="Inbox" />
+                <ListItemText secondary="Inbox" />
               </ListItem>
-              <ListItem button onClick={() => routeTo(route.signinPage)}>
+              <ListItem button>
                 <ListItemIcon>
-                  <ExitToAppIcon style={iconColor}/>
+                  <SettingsIcon style={iconColor}/>
                 </ListItemIcon>
-                <ListItemText primary="Signup/Login" />
+                <ListItemText secondary="Settings" />
               </ListItem>
+              <ListItem button>
+                <ListItemIcon>
+                  <InfoIcon style={iconColor}/>
+                </ListItemIcon>
+                <ListItemText secondary="About us" />
+              </ListItem>         
             </List>
           </Grid>
         </SwipeableDrawer>
