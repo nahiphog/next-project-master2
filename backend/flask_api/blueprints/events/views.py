@@ -5,11 +5,12 @@ from flask_api.util.response import *
 from models.user import User
 from models.request import Request
 
+import datetime
+
 events_api_blueprint = Blueprint('events_api', __name__)
 
 @events_api_blueprint.route('/create', methods=['POST'])
 @jwt_required
-
 def create():
 
     if not request.is_json:
@@ -19,15 +20,21 @@ def create():
     user = User.get_or_none(jwt_identity == User.name)
 
     if user: 
-        event_info = request.get_json
-        query = Request(lesson=event_info.lesson_id, user= user.id, start_datetime= event_info.start_datetime)
+
+        event_info = request.get_json()
+        lesson_id = event_info['lesson_id']
+        user_id = event_info['user_id']
+        start_datetime = event_info['start_datetime']
+
+        query = Request(lesson = lesson_id , user= user_id, start_datetime = start_datetime, status='Pending')
 
         if query.save():
             data = {
-                'lesson_id': event_info.lesson_id,
+                'lesson_id': lesson_id,
                 'user_id': user.id,
-                'start_datetime':event_info.start_datetime
+                'start_datetime': start_datetime
             }
+           
 
             return success_201('Event created successfully!', data)
         
@@ -40,7 +47,6 @@ def create():
 @events_api_blueprint.route('/', methods=['GET'])
 @jwt_required
 def index():
-
     jwt_identity = get_jwt_identity()
     user = User.get_or_none(User.name == jwt_identity)
 
@@ -87,14 +93,14 @@ def show(event_id):
 @events_api_blueprint.route('/<event_id>/datetime', methods=['POST'])
 @jwt_required
 def update_datetime(event_id):
-    if request.is_json():
+    if not request.is_json:
         return error_401('Response is not JSON!')
 
     jwt_identity = get_jwt_identity()
     user = User.get_or_none(User.name == jwt_identity)
     if user:
-        user_update = request.get_json
-        new_datetime = user_update.start_datetime
+        user_update = request.get_json()
+        new_datetime = user_update['start_datetime'] 
         event = Request.get_or_none(event_id == Request.id)
         query = Request.update(start_datetime = new_datetime).where(Request.id == event_id)
         if query.execute():
@@ -117,15 +123,18 @@ def update_datetime(event_id):
 @events_api_blueprint.route('/<event_id>/status', methods=['POST'])
 @jwt_required
 def update_status(event_id):
-    if request.is_json():
+    if not request.is_json:
         return error_401('Response is not JSON!')
 
     jwt_identity = get_jwt_identity()
+
     user = User.get_or_none(User.name == jwt_identity)
     if user:
-        user_update = request.get_json
-        new_status = user_update.status
+
+        user_update = request.get_json()
+        new_status = user_update['status'] 
         event = Request.get_or_none(event_id == Request.id)
+
         query = Request.update(status = new_status).where(Request.id == event_id)
         if query.execute():
             data = {
@@ -146,15 +155,15 @@ def update_status(event_id):
 @events_api_blueprint.route('/<event_id>/review', methods=['POST'])
 @jwt_required
 def update_review(event_id):
-    if request.is_json():
+    if not request.is_json:
         return error_401('Response is not JSON!')
 
     jwt_identity = get_jwt_identity()
     user = User.get_or_none(User.name == jwt_identity)
     if user:
-        user_update = request.get_json
-        new_rating = user_update.rating
-        new_comment = user_update.comment
+        user_update = request.get_json()
+        new_rating = user_update['rating']
+        new_comment = user_update['comment']
         event = Request.get_or_none(event_id == Request.id)
         query = Request.update(rating = new_rating, comment=new_comment).where(Request.id == event_id)
         if query.execute():
