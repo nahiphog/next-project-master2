@@ -8,10 +8,6 @@ users_api_blueprint = Blueprint('users_api', __name__)
 
 @users_api_blueprint.route('/', methods=['GET'])
 def index():
-    # Check for valid json
-    if not request.is_json:
-       return error_401("Reponse is not JSON")
-
     # Return list of users' details
     users = [ 
         {
@@ -62,10 +58,6 @@ def new():
 
 @users_api_blueprint.route('/<user_id>', methods=['GET'])
 def show(user_id):
-    # Check for valid json
-    if not request.is_json:
-       return error_401("Reponse is not JSON")
-
     # Return user details
     user = User.get_or_none(User.id == user_id) 
     data = {
