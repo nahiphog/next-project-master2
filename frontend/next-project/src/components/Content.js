@@ -5,6 +5,7 @@ import { route } from "../global";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
+import { generateData } from "../test/GenerateTestData";
 
 export default function Content() {
   const [routeOption, setRouteOption] = useState(route.close);
@@ -111,6 +112,9 @@ export default function Content() {
           onClick={() => routeTo(route.ratingPage)}
         >
           Rating
+        </Button>
+        <Button variant="outlined" color="primary" onClick={generateData}>
+          Generate Database
         </Button>
       </Grid>
       <DialogPage
