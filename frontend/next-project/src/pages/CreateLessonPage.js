@@ -1,11 +1,11 @@
 /* Import package components */
 import React, { useState } from "react";
-import { Button, ButtonGroup } from "@material-ui/core";
+import { Container, Button, ButtonGroup } from "@material-ui/core";
 import { route } from "../global";
 
 /* Import app components */
 import DialogPage from "../components/DialogPage";
-import LessonInfoPage from "../pages/LessonInfoPage";
+import LessonInputForm from "../pages/LessonInputForm";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -15,7 +15,7 @@ const ContainerStyles = {
   width: "100%"
 };
 
-export default function LessonPage() {
+export default function CreateLessonPage({ parentRouteTo, teach }) {
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
   const routeTo = option => {
@@ -29,13 +29,10 @@ export default function LessonPage() {
   return (
     <>
       <div style={ContainerStyles}>
-        <LessonInfoPage />
+        <LessonInputForm />
         <ButtonGroup fullWidth aria-label="full width button group">
-          <Button onClick={() => routeTo(route.todo)}>Bookmark</Button>
-          <Button onClick={() => routeTo(route.todo)}>Chat</Button>
-          <Button onClick={() => routeTo(route.createEventPage)}>
-            Request
-          </Button>
+          <Button onClick={() => parentRouteTo(route.close)}>Cancel</Button>
+          <Button onClick={() => routeTo(route.todo)}>Create</Button>
         </ButtonGroup>
       </div>
       <DialogPage

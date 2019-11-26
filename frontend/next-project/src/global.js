@@ -27,8 +27,8 @@ export const subTitle = [
   "Sign Up", //7
   "Profile", //8
   "Lesson", //9
-  "Create Lesson", //10
-  "Create Lesson", //11
+  "Create Learn", //10
+  "Create Teach", //11
   "Create Event", //12
   "Rating", //13
   "Todo" //14

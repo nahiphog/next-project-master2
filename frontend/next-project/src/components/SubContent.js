@@ -9,6 +9,7 @@ import LearnListPage from "../pages/LearnListPage";
 import BookmarksPage from "../pages/BookmarksPage";
 import TeachListPage from "../pages/TeachListPage";
 import CreateEventPage from "../pages/CreateEventPage";
+import CreateLessonPage from "../pages/CreateLessonPage";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -42,9 +43,9 @@ export default function SubContent({ routeTo, routeOption }) {
       case route.lessonPage:
         return <LessonPage parentRouteTo={routeTo} />;
       case route.createLearnPage:
-        return <p>todo: createLearnPage</p>;
+        return <CreateLessonPage parentRouteTo={routeTo} teach={false} />;
       case route.createTeachPage:
-        return <p>todo: createTeachPage</p>;
+        return <CreateLessonPage parentRouteTo={routeTo} teach={true} />;
       case route.createEventPage:
         return <CreateEventPage parentRouteTo={routeTo} />;
       case route.ratingPage:
