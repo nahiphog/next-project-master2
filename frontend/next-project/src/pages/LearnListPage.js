@@ -18,6 +18,10 @@ export default function LearnListPage(props) {
     }
     setRouteOption(option);
   };
+
+  
+
+
   return (
     <div>
       <div style={{ width: "100vw" }}>

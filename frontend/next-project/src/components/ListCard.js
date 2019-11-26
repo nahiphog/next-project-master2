@@ -32,7 +32,7 @@ export default function ListCard() {
       <div>
         <CardContent align="left">
           <Typography>Title: Some Lesson</Typography>
-          <Typography>Aurthor: Someone</Typography>
+          <Typography>Author: Someone</Typography>
           <Typography>Skill Categories: Computer Science</Typography>
           <Typography>Lesson Rating:</Typography>
           <Rating name="read-only" value={value} readOnly />

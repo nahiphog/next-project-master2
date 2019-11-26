@@ -3,6 +3,8 @@ from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
+from models.skill import Skill
+import re
 
 lessons_api_blueprint = Blueprint('lessons_api', __name__)
 
@@ -139,8 +141,36 @@ def update(lesson_id):
     else:
         return error_401("Invalid title or description")
 
-@lessons_api_blueprint.route('/delete', methods=['POST'])
-@jwt_required
+@lessons_api_blueprint.route('/search_lessons', methods=['GET'])
+# @jwt_required
 def delete():
-    pass
+
+    search_value = request.args['search_value']
+    print(search_value)
+
+    list_of_skills = []
+    final_lessons_list = []
+    
+    
+    split_search_value = search_value.split(" ")
+
+    for word in split_search_value: #loop through the split search string
+        for lesson in Lesson: #loop through all rows in Lesson
+            if lesson.teach:
+                if (word in lesson.title) or (word in lesson.skill): #if a word from the split search string is part of the lesson title, append it to a list
+                    final_lessons_list.append(lesson)
+    
+    
+    data = [
+        {'lesson': {
+            'id': lesson.id,
+            'description': lesson.decription,
+            'rating': lesson.rating,
+            'owner': lesson.owner_id
+        }} for lesson in final_lessons_list
+    ]
+
+    return success_201('success testing', data)
+
+    
 

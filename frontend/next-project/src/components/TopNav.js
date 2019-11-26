@@ -53,7 +53,7 @@ export default function TopNav() {
           <IconButton color="inherit" onClick={() => setOpen(!open)}>
             <Menu style={{ fontSize: "30px" }}  />
           </IconButton>
-          <div style={{ flexGrow: 1 }} />
+          <div style={{ flexGrow: 1, }} />
           {/* <Avatar onClick={() => routeTo(route.profilePage)}>S</Avatar> */}
                     <IconButton color="inherit" onClick={() => routeTo(route.profilePage)}>
             <AccountCircleIcon style={{ fontSize: "33px" }} />
