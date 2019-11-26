@@ -1,15 +1,21 @@
 /* Import package components */
 import React from "react";
 import { route } from "../global";
-import LessonPage from "../pages/LessonPage";
 
 /* Import app components */
 import InboxListPage from "../pages/InboxListPage";
+import EventListPage from "../pages/EventListPage";
 import LearnListPage from "../pages/LearnListPage";
+import SignInPage from "../pages/SignInPage";
+import SignUpPage from "../pages/SignUpPage";
+import ProfilePage from "../pages/ProfilePage";
+import LessonPage from "../pages/LessonPage";
 import BookmarksPage from "../pages/BookmarksPage";
 import TeachListPage from "../pages/TeachListPage";
 import CreateEventPage from "../pages/CreateEventPage";
 import CreateLessonPage from "../pages/CreateLessonPage";
+import RatingPage from "../pages/RatingPage";
+import EventPage from "../pages/EventPage";
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -27,7 +33,7 @@ export default function SubContent({ routeTo, routeOption }) {
       case route.inboxListPage:
         return <InboxListPage parentRouteTo={routeTo} />;
       case route.eventListPage:
-        return <p>todo: eventList</p>;
+        return <EventListPage parentRouteTo={routeTo} />;
       case route.teachListPage:
         return <TeachListPage parentRouteTo={routeTo} />;
       case route.learnListPage:
@@ -35,11 +41,11 @@ export default function SubContent({ routeTo, routeOption }) {
       case route.bookmarkListPage:
         return <BookmarksPage parentRouteTo={routeTo} />;
       case route.signinPage:
-        return <p>todo: signinPage</p>;
+        return <SignInPage parentRouteTo={routeTo} />;
       case route.signupPage:
-        return <p>todo: signupPage</p>;
+        return <SignUpPage parentRouteTo={routeTo} />;
       case route.profilePage:
-        return <p>todo: profilePage</p>;
+        return <ProfilePage parentRouteTo={routeTo} />;
       case route.lessonPage:
         return <LessonPage parentRouteTo={routeTo} />;
       case route.createLearnPage:
@@ -49,7 +55,9 @@ export default function SubContent({ routeTo, routeOption }) {
       case route.createEventPage:
         return <CreateEventPage parentRouteTo={routeTo} />;
       case route.ratingPage:
-        return <p>todo: ratingPage</p>;
+        return <RatingPage parentRouteTo={routeTo} />;
+      case route.eventPage:
+        return <EventPage parentRouteTo={routeTo} />;
       case route.todo:
         return <p>todo: please complete this component/page</p>;
       default:

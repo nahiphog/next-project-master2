@@ -13,16 +13,17 @@ export const route = {
   createTeachPage: 11,
   createEventPage: 12,
   ratingPage: 13,
-  todo: 14
+  eventPage: 14,
+  todo: 15
 };
 
 export const subTitle = [
   "", //0
   "Inbox", //1
-  "Event", //2
-  "Teach", //3
-  "Learn", //4
-  "Bookmark", //5
+  "Event List", //2
+  "Teach List", //3
+  "Learn List", //4
+  "Bookmark List", //5
   "Sign In", //6
   "Sign Up", //7
   "Profile", //8
@@ -31,5 +32,6 @@ export const subTitle = [
   "Create Teach", //11
   "Create Event", //12
   "Rating", //13
-  "Todo" //14
+  "Event", //14
+  "Todo" //15
 ];

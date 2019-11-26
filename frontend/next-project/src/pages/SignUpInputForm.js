@@ -2,16 +2,16 @@
 import React, { useState } from "react";
 import { Container, TextField } from "@material-ui/core";
 
-export default function CreateLessonPage() {
+export default function SignUpInputForm() {
   return (
     <>
       <Container maxWidth="sm">
-        {/* Title */}
+        {/* Username */}
         <TextField
           id="outlined-full-width"
-          label="Title"
+          label="Username"
           style={{ margin: 8 }}
-          placeholder="Title"
+          placeholder="Username"
           fullWidth
           margin="normal"
           InputLabelProps={{
@@ -20,12 +20,12 @@ export default function CreateLessonPage() {
           variant="outlined"
         />
 
-        {/* Description */}
+        {/* Email */}
         <TextField
           id="outlined-full-width"
-          label="Description"
+          label="Email"
           style={{ margin: 8 }}
-          placeholder="Description"
+          placeholder="Email"
           fullWidth
           margin="normal"
           InputLabelProps={{
@@ -34,12 +34,12 @@ export default function CreateLessonPage() {
           variant="outlined"
         />
 
-        {/* Skills */}
+        {/* Password */}
         <TextField
           id="outlined-full-width"
-          label="Skills"
+          label="Password"
           style={{ margin: 8 }}
-          placeholder="Skills"
+          placeholder="Password"
           fullWidth
           margin="normal"
           InputLabelProps={{
