@@ -6,6 +6,7 @@ import { route } from "../global";
 /* Import app components */
 import DialogPage from "../components/DialogPage";
 import LessonInputForm from "../pages/LessonInputForm";
+import UploadPage from "../components/UploadPage"
 
 /* CSS Styles */
 const ContainerStyles = {
@@ -18,6 +19,7 @@ const ContainerStyles = {
 export default function CreateLessonPage({ parentRouteTo, teach }) {
   const [routeOption, setRouteOption] = useState(route.close);
   const [dialogOpen, setDialogOpen] = useState(false);
+  const [userFile, setUploadFile] = useState()
   const routeTo = option => {
     if (option === route.close) {
       setDialogOpen(false);
@@ -26,9 +28,14 @@ export default function CreateLessonPage({ parentRouteTo, teach }) {
     }
     setRouteOption(option);
   };
+
   return (
     <>
       <div style={ContainerStyles}>
+        <UploadPage 
+         userFile={userFile}
+         setUploadFile={setUploadFile}
+        />
         <LessonInputForm />
         <ButtonGroup fullWidth aria-label="full width button group">
           <Button onClick={() => parentRouteTo(route.close)}>Cancel</Button>
