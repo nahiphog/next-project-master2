@@ -2,24 +2,27 @@ import { observable, decorate } from "mobx";
 
 class UserStore {
   currentUser = {
-    username: "logout",
-    userid: "-1",
+    name: "none",
+    id: -1,
+    profile_picture: "",
     loggedIn: false
   };
 
-  login = () => {
+  login = (name, id, profile_picture) => {
     // Just hardcode for now to demonstrate function
     // Use axios call later
-    this.currentUser.username = "login";
-    this.currentUser.userid = "0";
+    this.currentUser.name = name;
+    this.currentUser.id = id;
+    this.currentUser.profile_picture = profile_picture;
     this.currentUser.loggedIn = true;
   };
 
   logout = () => {
     // Just hardcode for now to demonstrate function
     // Use axios call later
-    this.currentUser.username = "logout";
-    this.currentUser.userid = "-1";
+    this.currentUser.name = "none";
+    this.currentUser.id = -1;
+    this.currentUser.profile_picture = "";
     this.currentUser.loggedIn = false;
   };
 }

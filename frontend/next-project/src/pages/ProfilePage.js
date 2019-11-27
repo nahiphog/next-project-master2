@@ -9,7 +9,7 @@ import {
   makeStyles,
   Typography
 } from "@material-ui/core";
-import { red } from "@material-ui/core/colors";
+import Avatar from "@material-ui/core/Avatar";
 import Rating from "@material-ui/lab/Rating";
 
 /* CSS Styles */
@@ -35,8 +35,9 @@ const useStyles = makeStyles(theme => ({
   expandOpen: {
     transform: "rotate(180deg)"
   },
-  avatar: {
-    backgroundColor: red[500]
+  bigAvatar: {
+    width: 240,
+    height: 240
   }
 }));
 
@@ -48,11 +49,18 @@ export default function ProfilePage() {
     <>
       <div style={ContainerStyles}>
         <Card>
-          <CardMedia
+          {/* <CardMedia
             className={classes.media}
             image="http://nextagram-lee.s3.amazonaws.com/ironman.jpg"
             title="Name"
-          />
+          /> */}
+          <div style={{ display:"flex", justifyContent:"center", marginTop:"10px"}}>
+            <Avatar
+              alt="Lee"
+              src="http://nextagram-lee.s3.amazonaws.com/ironman.jpg"
+              className={classes.bigAvatar}
+            />
+          </div>
           <CardHeader style={{ textAlign: "center" }} title="Name" />
           <CardContent>
             <Typography
@@ -81,7 +89,7 @@ export default function ProfilePage() {
           <CardContent>
             <Typography
               variant="subtitle1"
-              color="textSecondary"
+              color="textPrimary"
               component="p"
               align="justify"
             >
@@ -107,7 +115,7 @@ export default function ProfilePage() {
             </Typography>
             <Typography
               variant="body2"
-              color="textSecondary"
+              color="textPrimary"
               component="p"
               align="justify"
             >

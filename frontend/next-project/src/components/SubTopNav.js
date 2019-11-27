@@ -24,17 +24,11 @@ export default function SubTopNav({ routeTo, routeOption }) {
         </IconButton>
         </div>
         <div style={{ width: "100vw", justifyContent:"center" }} >
-        <IconButton
-          onClick={() => routeTo(route.close)}
-          style={{ color: "white"}}
-        >
-        <strong>{subTitle[routeOption]}</strong>
-        </IconButton>
+        <h2 style={{ color: "white"}}>{subTitle[routeOption]}</h2>
         </div>
         <div style={{ justifyContent:"center" }}>
         <IconButton
           edge="end"
-          onClick={() => routeTo(route.close)}
           style={{ color: "#1589FF" }}
         >
           <ArrowBackIosIcon />

@@ -2,7 +2,7 @@
 import React from "react";
 import { Container, TextField } from "@material-ui/core";
 
-export default function SignUpInputForm() {
+export default function SignUpInputForm({ userSignUp, setUserSignUp}) {
   return (
     <>
       <Container maxWidth="sm">
@@ -18,6 +18,15 @@ export default function SignUpInputForm() {
             shrink: true
           }}
           variant="outlined"
+          type="name"
+          value={userSignUp.name}
+          onChange ={e => setUserSignUp(
+            {
+              name: e.target.value,
+              email: userSignUp.email,
+              password: userSignUp.password,
+            }
+            )}
         />
 
         {/* Email */}
@@ -32,6 +41,15 @@ export default function SignUpInputForm() {
             shrink: true
           }}
           variant="outlined"
+          type="email"
+          value={userSignUp.email}
+          onChange ={e => setUserSignUp(
+            {
+              name: userSignUp.name,
+              email: e.target.value,
+              password: userSignUp.password,
+            }
+            )}
         />
 
         {/* Password */}
@@ -46,6 +64,15 @@ export default function SignUpInputForm() {
             shrink: true
           }}
           variant="outlined"
+          type="password"
+          value={userSignUp.password}
+          onChange ={e => setUserSignUp(
+            {
+              name: userSignUp.name,
+              email: userSignUp.email,
+              password: e.target.value,
+            }
+            )}
         />
       </Container>
     </>

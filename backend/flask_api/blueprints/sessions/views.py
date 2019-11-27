@@ -27,8 +27,9 @@ def create():
             data =  {
                 "id": user.id,
                 "profile_picture": user.profile_picture,
-                "username": user.name,
-                "access_token": access_token,
+                "name": user.name,
+                'email': user.email,
+                "access_token": access_token
             }
             return success_201('User credentials are verified for sign in!', data)
         else:
