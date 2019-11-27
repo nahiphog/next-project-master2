@@ -173,4 +173,15 @@ def search_lessons():
     return success_201('success testing', data)
 
     
+@lessons_api_blueprint.route('/add_image', methods=['POST'])
+@jwt_required
+def add_image():
+    if not request.is_json:
+        return error_401("Reponse is not JSON")
+
+    # Check if user exists and signed in
+    jwt_user = get_jwt_identity()
+    user = User.get_or_none(User.name == jwt_user) 
+
+    # if user:
 
