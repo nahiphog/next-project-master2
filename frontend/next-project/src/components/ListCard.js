@@ -9,8 +9,12 @@ import Rating from "@material-ui/lab/Rating";
 const useStyles = makeStyles(theme => ({
   card: {
     display: "flex",
-    height: "20vh",
-    width: "98vw"
+    height: "22vh",
+    width: "98vw",
+    borderRadius: 8,
+    border: "1px solid #d3d3d3",
+    color:"#4c4c4c",
+    fontSize:"12px"
   },
   cover: {
     width: 151
