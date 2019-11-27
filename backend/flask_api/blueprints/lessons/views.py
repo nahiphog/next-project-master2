@@ -4,7 +4,7 @@ from flask_api.util.response import *
 from models.user import User
 from models.lesson import Lesson
 from models.skill import Skill
-import re
+from helpers import upload_file_to_s3
 
 lessons_api_blueprint = Blueprint('lessons_api', __name__)
 
@@ -176,12 +176,22 @@ def search_lessons():
 @lessons_api_blueprint.route('/add_image', methods=['POST'])
 @jwt_required
 def add_image():
-    if not request.is_json:
-        return error_401("Reponse is not JSON")
 
-    # Check if user exists and signed in
     jwt_user = get_jwt_identity()
     user = User.get_or_none(User.name == jwt_user) 
 
-    # if user:
-
+    if user:
+        image_file = request.files.get('image')
+        request_data = request.get_json()
+        if request_data:
+            lesson_id = request_data.lesson_id
+            query = Lesson.update(image = image_file.filename).where(Lesson.id == lesson_id)
+            if query.execute() and upload_file_to_s3(image_file):
+                return success_201('Image successfully saved and uploaded!')
+            else:
+                return error_401('Error when saving image to S3 or database!')
+        else:
+            return error_401('Requested data is not JSON or not found!')
+    else:
+        error_401('User not found!')
+    
